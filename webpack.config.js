@@ -1,26 +1,31 @@
 const path = require('path'),
-  __dirdist = './dist',
+  __dirDist = './dist',
   __dirReactSource = './src/js/react',
-  extractTextPlugin = require('extract-text-webpack-plugin'),
+  miniCssExtractPlugin = require('mini-css-extract-plugin'),
+  optimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
   assetsPlugin = require('assets-webpack-plugin'),
   cleanWebpackPlugin = require('clean-webpack-plugin'),
+  dotEnv = require('dotenv').config(),
+  __dirReactAssets = 'ra',
   reactAssetJson = 'react-assets.json',
   assetsPluginInstance = new assetsPlugin({
     fullPath: true,
     filename: path.join(reactAssetJson)
     // prettyPrint: true // Whether to format the JSON output for readability. 'false' by default
   }),
+  devMode = process.env.NODE_ENV !== 'production',
+  hashFileName = !devMode ? '.[hash].' : '.',
   entryPoints = {
     'contact-us': path.resolve(__dirReactSource, 'contact-us.js'),
     'about-us': path.resolve(__dirReactSource, 'about-us.js')
   }
 
-module.exports = {
+module.exports = (env, argv) => ({
   entry: entryPoints,
   output: {
-    path: path.resolve(__dirdist, 'ra'),
-    filename: '[name].[hash].bundle.js',
-    chunkFilename: '[id].[hash].chunk.js'
+    path: path.resolve(__dirDist, __dirReactAssets),
+    filename: '[name]' + hashFileName + 'bundle.js',
+    chunkFilename: '[id]' + hashFileName + 'chunk.js'
   },
   optimization: {
     splitChunks: {
@@ -30,18 +35,19 @@ module.exports = {
           chunks: 'all'
         }
       }
-    }
+    },
+    minimizer: [new optimizeCSSAssetsPlugin({})]
   },
   plugins: [
-    new extractTextPlugin({
-      filename: '[name].[hash].css',
-      disable: false,
-      allChunks: true
+    new miniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name]' + hashFileName + 'css',
+      chunkFilename: devMode ? '[id].css' : '[id]' + hashFileName + 'css'
+      // allChunks: true
     }),
     assetsPluginInstance,
     /* If its not handled by the automated scripts */
-    new cleanWebpackPlugin(['ra'], {
-      root: path.resolve(__dirdist),
+    new cleanWebpackPlugin([__dirReactAssets], {
+      root: path.resolve(__dirDist),
       verbose: true,
       dry: false
     })
@@ -58,13 +64,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        /* Creates CSS files & save ref in react-assets.json */
-        loader: extractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-        /* Loads the CSS into JS, inline styles */
-        // use: ['style-loader', 'css-loader']
+        use: [
+          devMode ? 'style-loader' : miniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /.(gif|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
@@ -78,4 +81,4 @@ module.exports = {
   resolveLoader: {
     moduleExtensions: ['-loader']
   }
-}
+})
