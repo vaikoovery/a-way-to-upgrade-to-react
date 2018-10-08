@@ -9,6 +9,7 @@
         <li><a href="contact-us.php">Contact Us</a></li>
         <li><a href="about-us.php">About Us</a></li>
         <li><a href="contact-us-react.php">Contact Us React</a></li>
+        <li><a href="about-us-react.php">About Us React</a></li>
       </ul>
     </div>
   </nav>

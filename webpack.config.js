@@ -11,12 +11,13 @@ const path = require('path'),
     // prettyPrint: true // Whether to format the JSON output for readability. 'false' by default
   }),
   entryPoints = {
-    'contact-us': path.resolve(__dirReactSource, 'contact-us.js')
+    'contact-us': path.resolve(__dirReactSource, 'contact-us.js'),
+    'about-us': path.resolve(__dirReactSource, 'about-us.js')
   }
+
 module.exports = {
   entry: entryPoints,
   output: {
-    // path: path.resolve(__dirdist, 'ra', '[hash]'),
     path: path.resolve(__dirdist, 'ra'),
     filename: '[name].[hash].bundle.js',
     chunkFilename: '[id].[hash].chunk.js'
@@ -57,10 +58,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        /* Creates CSS files & save ref in react-assets.json */
         loader: extractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
         })
+        /* Loads the CSS into JS, inline styles */
+        // use: ['style-loader', 'css-loader']
       },
       {
         test: /.(gif|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
