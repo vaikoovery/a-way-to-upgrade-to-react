@@ -1,13 +1,14 @@
 const path = require('path'),
-  __dirname = './dist',
+  __dirdist = './dist',
   __dirReactSource = './src/js/react',
-  webpack = require('webpack'),
   extractTextPlugin = require('extract-text-webpack-plugin'),
   assetsPlugin = require('assets-webpack-plugin'),
   cleanWebpackPlugin = require('clean-webpack-plugin'),
-  reactAssetJson = 'react_assets.json',
+  reactAssetJson = 'react-assets.json',
   assetsPluginInstance = new assetsPlugin({
-    filename: path.join(__dirname, reactAssetJson)
+    fullPath: true,
+    filename: path.join(reactAssetJson)
+    // prettyPrint: true // Whether to format the JSON output for readability. 'false' by default
   }),
   entryPoints = {
     'contact-us': path.resolve(__dirReactSource, 'contact-us.js')
@@ -15,38 +16,31 @@ const path = require('path'),
 module.exports = {
   entry: entryPoints,
   output: {
-    path: path.resolve(__dirname, 'ra', '[hash]'),
+    // path: path.resolve(__dirdist, 'ra', '[hash]'),
+    path: path.resolve(__dirdist, 'ra'),
     filename: '[name].[hash].bundle.js',
     chunkFilename: '[id].[hash].chunk.js'
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      filename: 'commons.[hash].js',
-      name: 'commons',
-      chunks: Object.keys(entryPoints)
-    }),
     new extractTextPlugin({
       filename: '[name].[hash].css',
       disable: false,
       allChunks: true
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        /* Production Env */
-        NODE_ENV: JSON.stringify('production')
-        /* Development Env */
-        // 'NODE_ENV': JSON.stringify('development')
-      }
-    }),
-    /* Production Env */
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
     assetsPluginInstance,
+    /* If its not handled by the automated scripts */
     new cleanWebpackPlugin(['ra'], {
-      root: path.resolve(__dirname),
+      root: path.resolve(__dirdist),
       verbose: true,
       dry: false
     })
@@ -58,7 +52,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['react']
+          presets: ['@babel/preset-react']
         }
       },
       {
