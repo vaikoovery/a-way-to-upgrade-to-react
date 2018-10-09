@@ -70,8 +70,8 @@ module.exports = (env, argv) => ({
         ]
       },
       {
-        test: /.(gif|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
-        loader: 'url-loader?limit=100000'
+        test: /.(jpeg|jpg|gif|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+        loader: 'url-loader?limit=10000' // use base64 if file is smaller than 10K byte
       }
     ]
   },

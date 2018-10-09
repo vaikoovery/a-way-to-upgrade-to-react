@@ -20,7 +20,7 @@ NOOO! I had failed, when I wanted to add new packages. I started getting pain in
 
 ## What did you do then?
 
-I told my friend the way I worked, he has asked me to change my approach by using webpack (`vX.X.X`).
+I told my friend the way I worked, he has asked me to change my approach by using webpack.
 
 Well, I had gone through the docs and started making the config file to bundle it.
 
@@ -44,7 +44,7 @@ I had spent some more time on `webpack` and came across hashing the files.
 
 Yes it does.
 
-I had to spend time again on finding out the solution for this as well. Came across the plugin [assets-webpack-plugin](https://github/assets-webpack-plugin) `vx.x.x` and did a work around with that.
+I had to spend time again on finding out the solution for this as well. Came across the plugin [assets-webpack-plugin](https://github/assets-webpack-plugin) and did a work around with that.
 
 It contains the latest hashed file names - JS & CSS in a json file which is specified in the `webpack` config.
 
@@ -56,8 +56,8 @@ With this logic, I could upgrade other modules on our website to _React Magic_
 
 In couple of months `React.js` released its `v15.x.x` and I thought I must do an upgrade and started working on it. I also had to upgrade the `webpack` to `v2.x.x`. The configuration changed a lot.
 
-# Now, how can I start with React 16?
+# Now, how can I start with React now?
 
-You can consider using `webpack` `v4.x.x`?
+You can start with `React 16` & `webpack` `v4.x.x` for bundling.
 
 [webpack.config.js](./webpack.config.js)

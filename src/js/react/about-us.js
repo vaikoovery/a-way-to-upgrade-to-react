@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import '../../css/about-us.css'
+import '../../css/font-awesome.min.css' // Used for demonstrating `url-loader` & `file-loader` in `webpack`
 
 class AboutUs extends React.Component {
   render() {
@@ -10,9 +11,11 @@ class AboutUs extends React.Component {
         <div className="row">
           <div className="col-xs-6 col-xs-offset-3">
             <div className="row">
-              <div className="col-xs-6">
-                <span className="custom-color-purple">Lorem Ipsum</span> is
-                simply dummy text of the printing and typesetting industry.
+              <div className="col-xs-6 bg-sample bg-sample-jpg">
+                <span className="custom-color-purple">
+                  <span className="fa fa-star">&nbsp;</span> Lorem Ipsum
+                </span>{' '}
+                is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever
                 since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book. It has survived
@@ -22,7 +25,7 @@ class AboutUs extends React.Component {
                 Lorem Ipsum passages, and more recently with desktop publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-6 bg-sample bg-sample-png">
                 <span className="custom-color-aqua">Contrary</span> to popular
                 belief, Lorem Ipsum is not simply random text. It has roots in a
                 piece of classical Latin literature from 45 BC, making it over

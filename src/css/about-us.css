@@ -4,3 +4,14 @@
 .custom-color-aqua {
   color: aqua;
 }
+.bg-sample {
+  background-size: cover;
+  color: #fff;
+}
+.bg-sample-jpg {
+  background-image: url('../img/bg-sample.jpg');
+}
+.bg-sample-png {
+  background-image: url('../img/bg-sample.png');
+  text-shadow: 2px 2px 10px #000;
+}
