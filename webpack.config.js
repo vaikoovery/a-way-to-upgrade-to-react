@@ -9,7 +9,7 @@ const path = require('path'),
   __dirReactAssets = 'ra',
   reactAssetJson = 'react-assets.json',
   assetsPluginInstance = new assetsPlugin({
-    fullPath: true,
+    fullPath: false,
     filename: path.join(reactAssetJson)
     // prettyPrint: true // Whether to format the JSON output for readability. 'false' by default
   }),
