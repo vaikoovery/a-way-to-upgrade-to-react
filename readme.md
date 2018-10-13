@@ -1,3 +1,9 @@
+# React Meetup Docs
+
+[Presentation PDF - A-Way-To-Upgrade-To-React](./docs/A-Way-To-Upgrade-To-React.pdf)
+
+[Presentation Google Slide](https://docs.google.com/presentation/d/e/2PACX-1vTaqaySe30TmgKJgMkVFtoY68RzJUdkgwdKhV7WFjwwEzTwUK3enzh6vz-ipxXP8Dq1VU-_CDe3tJfx/pub?start=false&loop=false&delayms=3000&slide=id.p)
+
 # Why did you choose React.js?
 
 To be frank, I had never heard about `React.js` till my friend [Revath S Kumar](https://github.com/user/revathskumar), visited me back in December, 2015. He had given an intro to it, then I tried out few code and liked the way it worked, though I didn't understand it much, I liked the `props` and `state` ;) & it was `v0.14.x` then.
