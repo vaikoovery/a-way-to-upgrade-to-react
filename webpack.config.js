@@ -64,10 +64,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.css$/,
-        use: [
-          devMode ? 'style-loader' : miniCssExtractPlugin.loader,
-          'css-loader'
-        ]
+        use: [miniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /.(jpeg|jpg|gif|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
